@@ -1,0 +1,5 @@
+1551696412952	Delete element
+1551697249008	Rename type 'UserDao'
+1551697276093	Move 'UserDaoJdbc.java' to 'jdbc'
+1551697291972	Move 'UserRowMapper.java' to 'jdbc'
+1551705095975	Delete element

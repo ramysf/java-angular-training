@@ -1,0 +1,63 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a sample."
+  version: "1.0"
+  title: "Swagger Maven Plugin Sample"
+paths:
+  /controller/users:
+    get:
+      operationId: "listUser"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+definitions:
+  Role:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      description:
+        type: "string"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      password:
+        type: "string"
+      salary:
+        type: "integer"
+        format: "int64"
+      age:
+        type: "integer"
+        format: "int32"
+      roles:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Role"
+  UserDto:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+      age:
+        type: "integer"
+        format: "int32"
+      salary:
+        type: "integer"
+        format: "int32"
