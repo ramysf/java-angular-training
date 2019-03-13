@@ -1,0 +1,11 @@
+package com.sword.dao;
+
+import java.util.List;
+
+import com.sword.model.Role;
+
+public interface RoleDao {
+
+	List<Role> findAll();
+
+}

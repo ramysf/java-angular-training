@@ -519,7 +519,8 @@ label.valid:after {
 
 .errMessage {
   color: #FF0000;
-}
+  position: relative;
+  top : -20px;}
 .alert-danger {
   color: #721c24;
   background-color: #f8d7da;

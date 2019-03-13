@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
   registerForm: FormGroup;
@@ -20,10 +20,10 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required, Validators.email]],
-      password:  ['', [Validators.required, Validators.minLength(6)]],
-      re_pass: ['', [Validators.required, Validators.minLength(6)]]
+      password:  ['', [Validators.required, Validators.minLength(5)]],
+      re_pass: ['', [Validators.required, Validators.minLength(5)]]
     });
   }
 

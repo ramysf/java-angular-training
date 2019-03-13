@@ -57,10 +57,8 @@ public class UserServiceControllerTest extends AbstractTest {
    public void createUser() throws Exception {
       String uri = "/signup";
       User user = new User();
-      user.setAge(12);
       user.setPassword("test");
       user.setUsername("unitTestUser");
-      user.setSalary(1234);
       String inputJson = super.mapToJson(user);
       MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
       int status = mvcResult.getResponse().getStatus();

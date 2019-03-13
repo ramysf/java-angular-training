@@ -55,6 +55,12 @@ public class UserController {
     public List<User> listUser(){
         return userService.findAll();
     }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public void delete(@PathVariable(value = "id") long id){
+         userService.delete(id);
+    }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     ////@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")

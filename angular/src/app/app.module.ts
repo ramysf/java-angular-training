@@ -2,8 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './auth/token.interceptor';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -33,9 +36,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

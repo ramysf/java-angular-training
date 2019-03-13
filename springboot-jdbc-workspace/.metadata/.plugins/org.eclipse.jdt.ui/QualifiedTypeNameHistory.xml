@@ -2,4 +2,7 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.sword.model.User"/>
 <fullyQualifiedTypeName name="org.springframework.jdbc.core.RowMapper"/>
+<fullyQualifiedTypeName name="com.sword.service.RoleService"/>
+<fullyQualifiedTypeName name="com.sword.dao.RoleDao"/>
+<fullyQualifiedTypeName name="com.sword.model.Role"/>
 </qualifiedTypeNameHistroy>

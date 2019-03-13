@@ -31,12 +31,8 @@ export class AuthService {
     return this.httpClient.post(`${this.AUTH_SERVER}/login`, user).pipe(
       tap(async (res: JwtResponse) => {
         if (res['token'] !== null) {
-          const decodedToken = this.helper.decodeToken(res['token']);
-          if (decodedToken['sub'] !== null && decodedToken['scopes'] !== null) {
-            localStorage.setItem('ACCESS_TOKEN', res['token']);
-            localStorage.setItem('EXPIRES_IN', decodedToken['exp']);
-            this.authSubject.next(true);
-          }
+          this.saveToken(res['token']);
+          this.authSubject.next(true);
         }
       })
     );
@@ -49,9 +45,22 @@ export class AuthService {
     this.authSubject.next(false);
   }
 
+  saveToken(token: string) {
+    if (typeof token !== 'undefined' && token !== null) {
+      const decodedToken = this.helper.decodeToken(token);
+      if (decodedToken['sub'] !== null && decodedToken['scopes'] !== null) {
+        localStorage.removeItem('ACCESS_TOKEN');
+        localStorage.removeItem('EXPIRES_IN');
+        localStorage.setItem('ACCESS_TOKEN', token);
+        localStorage.setItem('EXPIRES_IN', decodedToken['exp']);
+        }
+      }
+    }
+
+  public getToken(): string {
+    return localStorage.getItem('ACCESS_TOKEN');
+  }
   isAuthenticated() {
-    console.log(this.authSubject.asObservable());
-    // return this.authSubject.asObservable();
     return localStorage.getItem('ACCESS_TOKEN') !== null;
   }
 }

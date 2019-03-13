@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {AuthService} from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ export class AppComponent implements OnInit {
   title = 'Admin Panel';
   isDisplayed = false;
 
-  constructor(private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
+    if (authService.isAuthenticated()) {
+      router.navigate(['dashboard']);
+    }
   }
 
   ngOnInit() {
@@ -26,7 +30,5 @@ export class AppComponent implements OnInit {
         }
       }
     );
-    console.log(this.isDisplayed);
-
   }
 }

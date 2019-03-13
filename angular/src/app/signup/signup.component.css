@@ -556,5 +556,7 @@ label.valid:after {
 }
 .errMessage {
   color: #FF0000;
+  position: relative;
+  top: -20px;
 }
 /*# sourceMappingURL=style.css.map */

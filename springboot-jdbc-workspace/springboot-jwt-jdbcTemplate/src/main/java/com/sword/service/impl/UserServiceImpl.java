@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.sword.dao.RoleDao;
 import com.sword.dao.UserDao;
 import com.sword.model.Role;
 import com.sword.model.User;
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private RoleDao roleDao;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptEncoder;
@@ -30,15 +34,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userDao.findByUsername(username);
 		// TODO change
-		Role role = new Role();
-		role.setId(1);
-		role.setName("ROLE_ADMIN");
-		Role role1 = new Role();
-		role1.setId(2);
-		role1.setName("ROLE_USER");
-		Set<Role> roles = new HashSet<Role>();
-		roles.add(role);
-		roles.add(role1);
+//		Role role = new Role();
+//		role.setId(1);
+//		role.setName("ROLE_ADMIN");
+//		Role role1 = new Role();
+//		role1.setId(2);
+//		role1.setName("ROLE_USER");
+//		Set<Role> roles = new HashSet<Role>();
+//		roles.add(role);
+//		roles.add(role1);
+		Set<Role> roles = roleDao.findRoleByUserId(user.getId());
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
@@ -57,6 +62,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	public List<User> findAll() {
 		List<User> list = new ArrayList<>();
 		userDao.findAll().iterator().forEachRemaining(list::add);
+		for(User user : list) {
+			Set<Role> roles = roleDao.findRoleByUserId(user.getId());
+			user.setRoles(roles);
+//			user.setRoles(roleDao.findRoleByUserId(user.getId()));
+		}
 		return list;
 	}
 
